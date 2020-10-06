@@ -6,6 +6,18 @@
 </head>
 <body>
 <div>Hello, pidorok</div>
-<a href="/main">Main page</a>
+<div id="root">
+    <div id="characters">
+        {{#characters}}
+            <div>
+                <b>{{name}}</b>
+                <span>{{hp}}</span>
+            </div>
+        {{/characters}}
+        <a href="/add-character">Add new random char</a>
+        <a href="/">Start</a>
+    </div>
+</div>
+
 </body>
 </html>
