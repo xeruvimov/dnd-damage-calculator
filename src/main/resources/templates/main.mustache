@@ -5,17 +5,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<div>Hello, pidorok</div>
+<div>Hello</div>
 <div id="root">
     <div id="characters">
-        {{#characters}}
-            <div>
-                <b>{{name}}</b>
-                <span>{{hp}}</span>
-            </div>
-        {{/characters}}
+        {{#data}}
+            {{#characters}}
+                <div>
+                    <b>{{name}}</b>
+                    <span>{{hp}}</span>
+                </div>
+            {{/characters}}
+        {{/data}}
         <a href="/add-character">Add new random char</a>
         <a href="/">Start</a>
+        <a href="/clear-all">Clear all data</a>
+    </div>
+    <div>
+        <form method="post" action="/new-char">
+            <input type="text" name="name" placeholder="Input Name"/>
+            <input type="number" name="hp" placeholder="Input HP">
+            <button type="submit">Add</button>
+        </form>
     </div>
 </div>
 
