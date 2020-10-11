@@ -11,8 +11,19 @@
         {{#data}}
             {{#characters}}
                 <div>
-                    <b>{{name}}</b>
-                    <span>{{hp}}</span>
+                    <div>
+                        <b>{{name}}</b>
+                        <span>{{hp}}</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="buff_configurator">
+                        <select name="Тип" id="buff_type">
+                            <option value="buff">Buff</option>
+                            <option value="debuff">Debuff</option>
+                        </select>
+                    </div>
+                    <div class="moment_damage"></div>
                 </div>
             {{/characters}}
         {{/data}}

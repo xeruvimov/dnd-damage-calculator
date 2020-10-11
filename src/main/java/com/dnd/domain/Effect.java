@@ -1,13 +1,14 @@
 package com.dnd.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@AllArgsConstructor
-public class Debuff extends AbstractEntity {
+@NoArgsConstructor
+public class Effect extends AbstractEntity {
     private int duration;
     private String description;
+    private int hpPerTurn;
 }
