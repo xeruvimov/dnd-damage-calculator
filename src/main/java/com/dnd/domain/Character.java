@@ -11,5 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 public class Character extends AbstractEntity {
     private int hp;
-    private List<PeriodicalDamage> periodicalDamages;
+    private List<Effect> effects;
 }
