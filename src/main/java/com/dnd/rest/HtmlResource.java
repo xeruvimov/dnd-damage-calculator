@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -27,7 +26,7 @@ public class HtmlResource {
     public String main(@CookieValue(value = "data", required = false) Cookie data,
                        Model model,
                        HttpServletResponse response) {
-        DataModel dataModel = createDataModel(data);
+        DataModel dataModel = initDataModel(data);
         setResult(model, response, dataModel);
         return "main";
     }
@@ -44,7 +43,7 @@ public class HtmlResource {
                                 @RequestParam int hp,
                                 Model model,
                                 HttpServletResponse response) {
-        DataModel dataModel = createDataModel(data);
+        DataModel dataModel = initDataModel(data);
         characterService.addNewChar(name, hp, dataModel);
         setResult(model, response, dataModel);
         return DEFAULT_REDIRECT;
@@ -55,7 +54,7 @@ public class HtmlResource {
                                  @PathVariable UUID id,
                                  Model model,
                                  HttpServletResponse response) {
-        DataModel dataModel = createDataModel(data);
+        DataModel dataModel = initDataModel(data);
         characterService.deleteCharById(id, dataModel);
         setResult(model, response, dataModel);
         return DEFAULT_REDIRECT;
@@ -67,8 +66,23 @@ public class HtmlResource {
                              @RequestParam int damage,
                              Model model,
                              HttpServletResponse response) {
-        DataModel dataModel = createDataModel(data);
+        DataModel dataModel = initDataModel(data);
         characterService.dealDamage(id, damage, dataModel);
+        setResult(model, response, dataModel);
+        return DEFAULT_REDIRECT;
+    }
+
+    @PostMapping("/create-effect/{id}")
+    public String createNewEffect(@CookieValue(value = "data", required = false) Cookie data,
+                                  @PathVariable UUID id,
+                                  @RequestParam String name,
+                                  @RequestParam String description,
+                                  @RequestParam int duration,
+                                  @RequestParam int hpPerTurn,
+                                  Model model,
+                                  HttpServletResponse response) {
+        DataModel dataModel = initDataModel(data);
+        characterService.addNewEffect(id, name, duration, description, hpPerTurn, dataModel);
         setResult(model, response, dataModel);
         return DEFAULT_REDIRECT;
     }
@@ -81,7 +95,7 @@ public class HtmlResource {
         model.addAttribute(DATA_ID, dataModel);
     }
 
-    private DataModel createDataModel(Cookie data) {
+    private DataModel initDataModel(Cookie data) {
         if (data == null || data.getValue().isEmpty()) {
             DataModel dataModel = new DataModel();
             dataModel.setCharacters(new ArrayList<>());

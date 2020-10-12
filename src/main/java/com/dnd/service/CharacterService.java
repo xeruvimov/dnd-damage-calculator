@@ -11,4 +11,6 @@ public interface CharacterService {
     void deleteCharById(UUID id, DataModel dataModel);
 
     void dealDamage(UUID id, int damage, DataModel dataModel);
+
+    void addNewEffect(UUID id, String name, int duration, String description, int hpPerTurn, DataModel dataModel);
 }
