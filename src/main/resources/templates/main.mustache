@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Repair request service</title>
+    <title>DND damage calculator</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
@@ -15,6 +15,7 @@
                         <b>{{name}}</b>
                         <span>{{hp}}</span>
                     </div>
+                    <a href="/delete-char/{{id}}">Delete char</a>
                 </div>
                 <div>
                     <div class="buff_configurator">
@@ -23,7 +24,12 @@
                             <option value="debuff">Debuff</option>
                         </select>
                     </div>
-                    <div class="moment_damage"></div>
+                    <div class="moment_damage">
+                        <form method="post" action="/deal-damage/{{id}}">
+                            <input type="number" name="damage" placeholder="Input damage"/>
+                            <button type="submit">Deal damage</button>
+                        </form>
+                    </div>
                 </div>
             {{/characters}}
         {{/data}}
