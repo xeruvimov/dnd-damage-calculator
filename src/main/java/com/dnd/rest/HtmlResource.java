@@ -87,6 +87,17 @@ public class HtmlResource {
         return DEFAULT_REDIRECT;
     }
 
+    @GetMapping("/delete-effect/{effectId}")
+    public String deleteEffect(@CookieValue(value = "data", required = false) Cookie data,
+                               @PathVariable UUID effectId,
+                               Model model,
+                               HttpServletResponse response) {
+        DataModel dataModel = initDataModel(data);
+        characterService.deleteEffect(effectId, dataModel);
+        setResult(model, response, dataModel);
+        return DEFAULT_REDIRECT;
+    }
+
     private void setResult(Model model, HttpServletResponse response, DataModel dataModel) {
         Cookie cookie = new Cookie(DATA_ID, mapperImpl.toJson(dataModel));
         cookie.setMaxAge(3600);

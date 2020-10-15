@@ -17,12 +17,12 @@ public class CharacterServiceImpl implements CharacterService {
         character.setHp(hp);
         dataModel.getCharacters().add(character);
     }
-
+    
     @Override
     public void deleteCharById(UUID id, DataModel dataModel) {
         dataModel.getCharacters().removeIf(character -> character.getId().equals(id));
     }
-
+    
     @Override
     public void dealDamage(UUID id, int damage, DataModel dataModel) {
         dataModel.getCharacters().forEach(character -> {
@@ -31,7 +31,7 @@ public class CharacterServiceImpl implements CharacterService {
             }
         });
     }
-
+    
     @Override
     public void addNewEffect(UUID id,
                              String name,
@@ -49,5 +49,11 @@ public class CharacterServiceImpl implements CharacterService {
                 character.getEffects().add(effect);
             }
         });
+    }
+    
+    @Override
+    public void deleteEffect(UUID effectId, DataModel dataModel) {
+        dataModel.getCharacters()
+                .forEach(character -> character.getEffects().removeIf(effect -> effect.getId().equals(effectId)));
     }
 }

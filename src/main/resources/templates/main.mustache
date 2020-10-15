@@ -23,12 +23,31 @@
                             <option value="buff">Buff</option>
                             <option value="debuff">Debuff</option>
                         </select>
+
+                        <form method="post" action="/create-effect/{{id}}">
+                            <input type="text" name="name" placeholder="Input name">
+                            <input type="text" name="description" placeholder="Input description">
+                            <input type="number" name="duration" placeholder="Input duration">
+                            <input type="number" name="hpPerTurn" placeholder="Input damage per turn">
+                            <button type="submit">Add effect</button>
+                        </form>
                     </div>
                     <div class="moment_damage">
                         <form method="post" action="/deal-damage/{{id}}">
                             <input type="number" name="damage" placeholder="Input damage"/>
                             <button type="submit">Deal damage</button>
                         </form>
+                    </div>
+                    <div class="buff-list">
+                        {{#effects}}
+                            <div>
+                                <b>{{name}}</b>
+                                <span>{{description}}</span>
+                                <span>{{duration}}</span>
+                                <span>{{hpPerTurn}}</span>
+                            </div>
+                            <a href="/delete-effect/{{id}}">Delete effect</a>
+                        {{/effects}}
                     </div>
                 </div>
             {{/characters}}
