@@ -3,28 +3,63 @@
 <head>
     <title>DND damage calculator</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+
 </head>
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .brd {
+        border: 4px double black;
+        background: #b8ffdd;
+        padding: 10px;
+    }
+
+    .char_name {
+        font-size: 22px;
+    }
+
+    .mrg > * {
+        margin-left: 10px;
+    }
+</style>
 <body>
-<div>Hello</div>
+<br/>
+<div class="mrg">
+    <a href="/">Start</a>
+    <a href="/clear-all">Clear all data</a>
+</div>
+<br>
+<div class="mrg">
+    <form method="post" action="/new-char">
+        <input type="text" name="name" placeholder="Input Name"/>
+        <input type="number" name="hp" placeholder="Input HP">
+        <button type="submit">Add</button>
+    </form>
+</div>
+<br/>
 <div id="root">
-    <div id="characters">
-        {{#data}}
-            {{#characters}}
+<div id="characters">
+    {{#data}}
+        {{#characters}}
+            <div class="brd">
                 <div>
                     <div>
-                        <b>{{name}}</b>
-                        <span>{{hp}}</span>
+                        <b class="char_name">{{name}}</b>
+                        <span style="margin-left: 10px;">HP:{{hp}}</span>
                     </div>
-                    <a href="/delete-char/{{id}}">Delete char</a>
+                    <br>
+                    <a style="margin-left: 10px;" href="/delete-char/{{id}}">Delete char</a>
                 </div>
+                <br>
                 <div>
                     <div class="buff_configurator">
-                        <select name="Тип" id="buff_type">
-                            <option value="buff">Buff</option>
-                            <option value="debuff">Debuff</option>
-                        </select>
-
-                        <form method="post" action="/create-effect/{{id}}">
+                        <form class="mrg" method="post" action="/create-effect/{{id}}">
                             <input type="text" name="name" placeholder="Input name">
                             <input type="text" name="description" placeholder="Input description">
                             <input type="number" name="duration" placeholder="Input duration">
@@ -32,36 +67,33 @@
                             <button type="submit">Add effect</button>
                         </form>
                     </div>
-                    <div class="moment_damage">
+                    <br>
+                    <div class="moment_damage mrg">
                         <form method="post" action="/deal-damage/{{id}}">
-                            <input type="number" name="damage" placeholder="Input damage"/>
+                            <input type="number" name="damage" placeholder=" Instant damage"/>
                             <button type="submit">Deal damage</button>
                         </form>
                     </div>
-                    <div class="buff-list">
-                        {{#effects}}
-                            <div>
-                                <b>{{name}}</b>
-                                <span>{{description}}</span>
-                                <span>{{duration}}</span>
-                                <span>{{hpPerTurn}}</span>
-                            </div>
-                            <a href="/delete-effect/{{id}}">Delete effect</a>
-                        {{/effects}}
+                <div class="buff-list mrg">
+                    <br>
+                    {{#effects}}
+                        <div
+                        ">
+                        <b>{{name}} - </b>
+                        <span>{{description}}</span>
+                        <span>Duration:{{duration}}</span>
+                        <span>DPT:{{hpPerTurn}}</span>
                     </div>
+                        <a style="margin-left: 10px" href="/delete-effect/{{id}}">Delete effect</a>
+                        <br>
+                    {{/effects}}
                 </div>
-            {{/characters}}
-        {{/data}}
-        <a href="/">Start</a>
-        <a href="/clear-all">Clear all data</a>
-    </div>
-    <div>
-        <form method="post" action="/new-char">
-            <input type="text" name="name" placeholder="Input Name"/>
-            <input type="number" name="hp" placeholder="Input HP">
-            <button type="submit">Add</button>
-        </form>
-    </div>
+            </div>
+        </div>
+            <br/>
+        {{/characters}}
+    {{/data}}
+</div>
 </div>
 
 </body>
